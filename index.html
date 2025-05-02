@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-900 text-gray-100 relative">
   <header class="bg-black p-4 flex items-center justify-between shadow-lg">
     <img src="logo.png" alt="Logo Automação GL" class="h-20" />
     <nav class="space-x-6">
@@ -94,29 +94,68 @@
   <section id="form-orcamento" class="bg-gray-800 py-16 px-6 fade-in-up">
     <div class="max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-red-500 mb-6 text-center">Solicite um Orçamento</h2>
-      <form action="https://formsubmit.co/servicos.autogl@gmail.com" method="POST" class="space-y-6">
-        <input type="hidden" name="_next" value="https://www.automacaogl.com/obrigado.html">
+      <form id="formOrcamento" action="https://formsubmit.co/ajax/servicos.autogl@gmail.com" method="POST" class="space-y-6">
         <input type="hidden" name="_captcha" value="false">
         <div>
           <label class="block mb-1 font-semibold">Nome</label>
-          <input type="text" class="w-full p-3 rounded-lg bg-gray-700 text-white" placeholder="Seu nome" required />
+          <input type="text" name="name" class="w-full p-3 rounded-lg bg-gray-700 text-white" placeholder="Seu nome" required />
         </div>
         <div>
           <label class="block mb-1 font-semibold">E-mail</label>
-          <input type="email" class="w-full p-3 rounded-lg bg-gray-700 text-white" placeholder="seu@email.com" required />
+          <input type="email" name="email" class="w-full p-3 rounded-lg bg-gray-700 text-white" placeholder="seu@email.com" required />
         </div>
         <div>
           <label class="block mb-1 font-semibold">Mensagem</label>
-          <textarea class="w-full p-3 rounded-lg bg-gray-700 text-white" rows="4" placeholder="Descreva sua necessidade..." required></textarea>
+          <textarea name="message" class="w-full p-3 rounded-lg bg-gray-700 text-white" rows="4" placeholder="Descreva sua necessidade..." required></textarea>
         </div>
         <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Enviar</button>
       </form>
     </div>
   </section>
 
+  <!-- Modal de Agradecimento -->
+  <div id="agradecimentoModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 text-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center">
+      <h2 class="text-2xl font-bold mb-4">Obrigado pelo contato!</h2>
+      <p class="mb-6">Sua mensagem foi enviada com sucesso. Retornaremos em breve.</p>
+      <button onclick="fecharModal()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full transition">Fechar</button>
+    </div>
+  </div>
+
   <footer class="bg-black text-gray-500 text-center py-6">
     <p>&copy; 2025 Automação GL. Todos os direitos reservados.</p>
-    <p><a href="https://www.automacaogl.com" class="text-red-500 hover:underline">www.automacaogl.com</a></p>
+    <p><a href="https://www.automacaogl.com.br" class="text-red-500 hover:underline">www.automacaogl.com.br</a></p>
   </footer>
+
+  <script>
+    const form = document.getElementById("formOrcamento");
+    const modal = document.getElementById("agradecimentoModal");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          modal.classList.remove("hidden");
+        } else {
+          alert("Erro ao enviar. Tente novamente mais tarde.");
+        }
+      }).catch(error => {
+        alert("Erro ao enviar. Verifique sua conexão.");
+      });
+    });
+
+    function fecharModal() {
+      modal.classList.add("hidden");
+    }
+  </script>
 </body>
 </html>
