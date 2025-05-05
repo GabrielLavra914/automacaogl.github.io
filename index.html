@@ -103,15 +103,18 @@
     }
     @media (max-width: 768px) {
   header {
-    padding-right: 2rem; /* Ajusta o espaçamento direito */
+    padding-right: 2rem; /* Ajusta o espaçamento direito do cabeçalho */
   }
 
   nav {
-    margin-left: auto; /* Empurra as opções para a direita */
+    display: flex;
+    justify-content: flex-end; /* Alinha as opções de navegação à direita */
+    width: 100%; /* Garante que o nav ocupe toda a largura disponível */
   }
 
   nav a {
-    padding-right: 1rem; /* Dá um pequeno espaçamento entre os links e a borda */
+    padding-left: 1rem; /* Adiciona um pequeno espaçamento entre os links */
+    padding-right: 1rem; /* Dá um pequeno espaçamento à direita */
   }
 }
   </style>
