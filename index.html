@@ -101,22 +101,23 @@
       opacity: 1;
       transform: translateY(-2px);
     }
+header nav {
+      display: flex;
+      justify-content: space-between; /* Espaça as opções de forma igual */
+      gap: 2rem; /* Espaçamento entre os links */
+    }
+
+    /* Estilo para celular */
     @media (max-width: 768px) {
-  header {
-    padding-right: 2rem; /* Ajusta o espaçamento direito do cabeçalho */
-  }
+      header nav {
+        flex-direction: column; /* Coloca as opções em coluna no celular */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+      }
 
-  nav {
-    display: flex;
-    justify-content: flex-end; /* Alinha as opções de navegação à direita */
-    width: 100%; /* Garante que o nav ocupe toda a largura disponível */
-  }
-
-  nav a {
-    padding-left: 1rem; /* Adiciona um pequeno espaçamento entre os links */
-    padding-right: 1rem; /* Dá um pequeno espaçamento à direita */
-  }
-}
+      nav a {
+        padding: 0.5rem 0; /* Ajusta o espaçamento entre os links */
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-gray-100">
