@@ -4,14 +4,14 @@
   <link rel="canonical" href="https://www.automacaogl.com.br/" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automação GL - Manutenção e Instalação de Máquinas a Laser</title>
+  <title>AGL - Manutenção e Instalação de Máquinas a Laser</title>
 
   <!-- Favicon padrão (.ico) para exibir o ícone na aba do navegador -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   
   <!-- Event snippet for Contact conversion page -->
-  <script>
+<script>
   gtag('event', 'conversion', {'send_to': 'AW-17049484473/Hkg6CMzmqMEaELn56cE_'});
 </script>
   <!-- Google tag (gtag.js) -->
@@ -25,12 +25,22 @@
   gtag('config', 'AW-17049484473');
 </script>
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17048648754"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17048648754');
+  </script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
   <style>
-    body { font-family: 'Orbitron', sans-serif; }
+    body { font-family: 'IBM Plex Sans', sans-serif; }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -129,84 +139,6 @@ header nav {
         padding: 0.5rem 0; /* Ajusta o espaçamento entre os links */
       }
     }
- /* Slider */
-    .slider-section {
-      position: relative;
-      max-width: 700px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
-    }
-
-    .slider-image {
-      width: 100%;
-      display: none;
-      object-fit: cover;
-      border-radius: 0.75rem;
-    }
-    .slider-image.active {
-      display: block;
-    }
-
-    .slider-text {
-      position: absolute;
-      bottom: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      text-shadow: 1px 1px 6px black;
-      width: 90%;
-      max-width: 650px;
-      background-color: rgba(0,0,0,0.4);
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      user-select: none;
-    }
-    .slider-text p {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    .slider-text a {
-      color: #f87171; /* Tailwind red-400 */
-      text-decoration: underline;
-      font-weight: 600;
-    }
-    .slider-text small {
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 0.85rem;
-      color: #fbbf24; /* Tailwind yellow-400 */
-    }
-
-    /* Setas laterais */
-    .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.5);
-      border: none;
-      color: white;
-      font-size: 2.5rem;
-      font-weight: bold;
-      padding: 0.2rem 0.8rem;
-      cursor: pointer;
-      border-radius: 9999px;
-      user-select: none;
-      z-index: 20;
-      transition: background-color 0.3s;
-    }
-    .slider-arrow:hover {
-      background-color: rgba(220, 38, 38, 0.8);
-    }
-    .slider-arrow.left {
-      left: 1rem;
-    }
-    .slider-arrow.right {
-      right: 1rem;
-    }
-
   </style>
 </head>
 <body class="bg-gray-900 text-gray-100">
@@ -214,7 +146,7 @@ header nav {
   <header class="bg-black p-4 flex items-center justify-between shadow-lg">
     <div class="flex items-center space-x-4">
       <img src="logo.png" alt="Logo Automação GL" class="h-16" />
-      <span class="text-white text-2xl font-bold">Automação GL</span>
+      <span class="text-white text-3xl font-bold">Automação GL</span>
     </div>
     <nav class="space-x-5">
       <a href="#servicos" class="text-gray-100 hover:text-red-500 transition">Serviços</a>
@@ -224,78 +156,15 @@ header nav {
   </header>
 
   <section class="relative text-white text-center py-20 fade-in-up overflow-hidden">
-   <img src="corte a laser.jpg" alt="Imagem 1" class="slider-image active" />
-    <img src="foto2.jpg" alt="Imagem 2" class="slider-image" />
-    <img src="foto3.jpg" alt="Imagem 3" class="slider-image" />
-    <div class="slider-text px-4">
-      <p id="slider-text">Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.</p>
-      <a href="#form-orcamento">Solicite um Orçamento</a>
-      <small>Atendimento em todo o Brasil</small>
+    <img src="corte a laser.jpg" alt="Corte a laser" class="absolute inset-0 w-full h-full object-cover opacity-30 z-0">
+    <div class="relative z-10 px-2 max-w-7xl mx-auto">
+      <p class="text-5xl md:text-6xl mb-6">Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.</p>
+      <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+        Solicite um Orçamento
+      </a>
+      <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
     </div>
-
-    <!-- Botões de seta -->
-    <button id="prev-btn" class="slider-arrow left" aria-label="Anterior">&lt;</button>
-    <button id="next-btn" class="slider-arrow right" aria-label="Próximo">&gt;</button>
   </section>
-
-  <script>
-    const slides = [
-      {
-        img: "corte a laser.jpg",
-        text: "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser."
-      },
-      {
-        img: "foto2.jpg",
-        text: "Instalação, manutenção e adequações NR12 para sua empresa."
-      },
-      {
-        img: "foto3.jpg",
-        text: "Atendimento personalizado e suporte técnico especializado em todo Brasil."
-      }
-    ];
-
-    let currentSlide = 0;
-    const images = document.querySelectorAll('.slider-image');
-    const sliderText = document.getElementById('slider-text');
-
-    function showSlide(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      currentSlide = index;
-
-      images.forEach((img, i) => {
-        img.classList.toggle('active', i === index);
-        img.src = slides[i].img;
-        img.alt = `Imagem ${i + 1}`;
-      });
-
-      sliderText.textContent = slides[index].text;
-    }
-
-    document.getElementById('prev-btn').addEventListener('click', () => {
-      showSlide(currentSlide - 1);
-      resetAutoplay();
-    });
-
-    document.getElementById('next-btn').addEventListener('click', () => {
-      showSlide(currentSlide + 1);
-      resetAutoplay();
-    });
-
-    let autoplayInterval = setInterval(() => {
-      showSlide(currentSlide + 1);
-    }, 2000);
-
-    function resetAutoplay() {
-      clearInterval(autoplayInterval);
-      autoplayInterval = setInterval(() => {
-        showSlide(currentSlide + 1);
-      }, 2000);
-    }
-
-    showSlide(0);
-  </script>
-
 
   <section id="servicos" class="max-w-6xl mx-auto px-6 py-16 fade-in-up">
     <h2 class="text-3xl font-bold text-red-500 mb-8 text-center">Nossos Serviços</h2>
