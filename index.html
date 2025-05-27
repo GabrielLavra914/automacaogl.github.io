@@ -6,18 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Automação GL - Manutenção e Instalação de Máquinas a Laser</title>
 
+  <!-- Favicon padrão (.ico) para exibir o ícone na aba do navegador -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17049484473"></script>
+  
+  <!-- Event snippet for Contact conversion page -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17049484473');
-  </script>
+  gtag('event', 'conversion', {'send_to': 'AW-17049484473/Hkg6CMzmqMEaELn56cE_'});
+</script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17049484473">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'AW-17049484473');
+</script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
@@ -35,18 +43,100 @@
       box-shadow: 0 10px 15px rgba(255, 0, 0, 0.3);
     }
 
-    header nav {
+    .modal-background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
       display: flex;
-      justify-content: space-between;
-      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
     }
 
+    .modal {
+      background: #1f2937;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      color: white;
+    }
+
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .floating-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #2d2d2d;
+      border-radius: 9999px;
+      padding: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .floating-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+    }
+
+    .floating-button img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .tooltip {
+      opacity: 0;
+      position: absolute;
+      right: 110%;
+      background-color: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 0.875rem;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .floating-button:hover .tooltip {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+header nav {
+      display: flex;
+      justify-content: space-between; /* Espaça as opções de forma igual */
+      gap: 2rem; /* Espaçamento entre os links */
+    }
+
+    /* Estilo para celular */
     @media (max-width: 768px) {
       header nav {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; /* Coloca as opções em coluna no celular */
+        align-items: flex-start; /* Alinha os itens à esquerda */
       }
-      nav a { padding: 0.5rem 0; }
+
+      nav a {
+        padding: 0.5rem 0; /* Ajusta o espaçamento entre os links */
+      }
+    }
+ /* Slider */
+    .slider-section {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
     }
 
     .slider-image {
@@ -66,14 +156,31 @@
       transform: translateX(-50%);
       color: white;
       text-shadow: 1px 1px 6px black;
+      width: 90%;
+      max-width: 650px;
       background-color: rgba(0,0,0,0.4);
       padding: 1rem 1.5rem;
       border-radius: 0.5rem;
-      max-width: 650px;
-      width: 90%;
       user-select: none;
     }
+    .slider-text p {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .slider-text a {
+      color: #f87171; /* Tailwind red-400 */
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    .slider-text small {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+      color: #fbbf24; /* Tailwind yellow-400 */
+    }
 
+    /* Setas laterais */
     .slider-arrow {
       position: absolute;
       top: 50%;
@@ -87,23 +194,29 @@
       cursor: pointer;
       border-radius: 9999px;
       user-select: none;
+      z-index: 20;
       transition: background-color 0.3s;
     }
     .slider-arrow:hover {
       background-color: rgba(220, 38, 38, 0.8);
     }
-    .slider-arrow.left { left: 1rem; }
-    .slider-arrow.right { right: 1rem; }
+    .slider-arrow.left {
+      left: 1rem;
+    }
+    .slider-arrow.right {
+      right: 1rem;
+    }
+
   </style>
 </head>
-
 <body class="bg-gray-900 text-gray-100">
+
   <header class="bg-black p-4 flex items-center justify-between shadow-lg">
     <div class="flex items-center space-x-4">
       <img src="logo.png" alt="Logo Automação GL" class="h-16" />
       <span class="text-white text-2xl font-bold">Automação GL</span>
     </div>
-    <nav>
+    <nav class="space-x-5">
       <a href="#servicos" class="text-gray-100 hover:text-red-500 transition">Serviços</a>
       <a href="#sobre" class="text-gray-100 hover:text-red-500 transition">Sobre</a>
       <a href="#Fotos" class="text-gray-100 hover:text-red-500 transition">Fotos</a>
@@ -111,37 +224,52 @@
   </header>
 
   <section class="relative text-white text-center py-20 fade-in-up overflow-hidden">
-    <img src="corte a laser.jpg" alt="Corte a Laser" class="slider-image active" />
-    <img src="nr12.jpeg" alt="NR12" class="slider-image" />
-    <img src="pontes rolantes.jpg" alt="Pontes Rolantes" class="slider-image" />
-    
-    <div class="slider-text">
+   <img src="corte a laser.jpg" alt="Imagem 1" class="slider-image active" />
+    <img src="foto2.jpg" alt="Imagem 2" class="slider-image" />
+    <img src="foto3.jpg" alt="Imagem 3" class="slider-image" />
+    <div class="slider-text px-4">
       <p id="slider-text">Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.</p>
       <a href="#form-orcamento">Solicite um Orçamento</a>
       <small>Atendimento em todo o Brasil</small>
     </div>
 
+    <!-- Botões de seta -->
     <button id="prev-btn" class="slider-arrow left" aria-label="Anterior">&lt;</button>
     <button id="next-btn" class="slider-arrow right" aria-label="Próximo">&gt;</button>
   </section>
 
   <script>
-    const sliderTexts = [
-      "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.",
-      "Instalação, manutenção e adequações NR12 para segurança da sua empresa.",
-      "Instalação, manutenção e reformas elétrica em pontes rolantes."
+    const slides = [
+      {
+        img: "corte a laser.jpg",
+        text: "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser."
+      },
+      {
+        img: "foto2.jpg",
+        text: "Instalação, manutenção e adequações NR12 para sua empresa."
+      },
+      {
+        img: "foto3.jpg",
+        text: "Atendimento personalizado e suporte técnico especializado em todo Brasil."
+      }
     ];
 
+    let currentSlide = 0;
     const images = document.querySelectorAll('.slider-image');
     const sliderText = document.getElementById('slider-text');
-    let currentSlide = 0;
 
     function showSlide(index) {
-      if (index < 0) index = images.length - 1;
-      if (index >= images.length) index = 0;
-      images.forEach((img, i) => img.classList.toggle('active', i === index));
-      sliderText.textContent = sliderTexts[index];
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
       currentSlide = index;
+
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+        img.src = slides[i].img;
+        img.alt = `Imagem ${i + 1}`;
+      });
+
+      sliderText.textContent = slides[index].text;
     }
 
     document.getElementById('prev-btn').addEventListener('click', () => {
@@ -154,12 +282,18 @@
       resetAutoplay();
     });
 
-    let autoplay = setInterval(() => showSlide(currentSlide + 1), 3000);
+    let autoplayInterval = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 2000);
 
     function resetAutoplay() {
-      clearInterval(autoplay);
-      autoplay = setInterval(() => showSlide(currentSlide + 1), 3000);
+      clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 2000);
     }
+
+    showSlide(0);
   </script>
 
 
