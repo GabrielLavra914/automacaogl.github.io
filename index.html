@@ -155,16 +155,69 @@ header nav {
     </nav>
   </header>
 
-  <section class="relative text-white text-center py-20 fade-in-up overflow-hidden">
-    <img src="corte a laser.jpg" alt="Corte a laser" class="absolute inset-0 w-full h-full object-cover opacity-30 z-0">
-    <div class="relative z-10 px-2 max-w-7xl mx-auto">
-      <p class="text-3xl md:text-4xl mb-6">Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.</p>
-      <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
-        Solicite um Orçamento
-      </a>
-      <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
-    </div>
-  </section>
+ <section class="relative text-white text-center py-20 fade-in-up overflow-hidden">
+  <div class="relative">
+    <img id="slider-image" src="corte a laser.jpg" alt="Imagem destaque" class="w-full h-full object-cover opacity-30 z-0">
+    
+    <!-- Botão seta esquerda -->
+    <button onclick="prevSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white text-3xl rounded-full p-2 hover:bg-opacity-75">
+      &#10094;
+    </button>
+    <!-- Botão seta direita -->
+    <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white text-3xl rounded-full p-2 hover:bg-opacity-75">
+      &#10095;
+    </button>
+  </div>
+  
+  <div class="relative z-10 px-2 max-w-7xl mx-auto">
+    <p id="slider-text" class="text-3xl md:text-4xl mb-6">
+      Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.
+    </p>
+    <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+      Solicite um Orçamento
+    </a>
+    <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
+  </div>
+</section>
+
+<script>
+  const slides = [
+    { 
+      image: "corte a laser.jpg", 
+      text: "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser." 
+    },
+    { 
+      image: "nr12.jpeg", 
+      text: "Instalação, manutenção e adequações NR12 para sua empresa." 
+    },
+    { 
+      image: "pontes rolantes.jpg", 
+      text: "Instalação, manutenção e reforma em pontes rolantes." 
+    }
+  ];
+
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    const slide = slides[index];
+    document.getElementById('slider-image').src = slide.image;
+    document.getElementById('slider-text').textContent = slide.text;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Troca automática a cada 6 segundos
+  setInterval(nextSlide, 6000);
+</script>
+
 
   <section id="servicos" class="max-w-6xl mx-auto px-6 py-16 fade-in-up">
     <h2 class="text-3xl font-bold text-red-500 mb-8 text-center">Nossos Serviços</h2>
