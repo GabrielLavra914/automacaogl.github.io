@@ -155,16 +155,17 @@ header nav {
     </nav>
   </header>
 
-  <section id="hero" class="relative text-white text-center py-20 overflow-hidden max-w-7xl mx-auto px-2" style="height: 400px;">
-  <div class="absolute inset-0 flex overflow-hidden z-0" style="pointer-events:none;">
-    <!-- Imagens lado a lado para efeito de slide infinito -->
-    <img src="corte a laser.jpg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
-    <img src="nr12.jpeg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
-    <img src="pontes rolantes.jpg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
-    <!-- Repetimos as primeiras imagens para efeito loop -->
-    <img src="corte a laser.jpg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
-    <img src="nr12.jpeg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
-    <img src="pontes rolantes.jpg" alt="" class="object-cover w-full h-full" style="flex-shrink: 0;">
+ <section id="hero" class="relative text-white text-center py-20 overflow-hidden max-w-7xl mx-auto px-2" style="height: 400px;">
+  <div id="slides-container" class="absolute inset-0 flex overflow-hidden z-0" style="pointer-events:none; width: 100%; height: 100%; transition: transform 0.6s ease-in-out;">
+    <div class="slide relative flex-shrink-0 w-full h-full">
+      <img src="corte a laser.jpg" alt="" class="object-cover w-full h-full">
+    </div>
+    <div class="slide relative flex-shrink-0 w-full h-full">
+      <img src="nr12.jpeg" alt="" class="object-cover w-full h-full">
+    </div>
+    <div class="slide relative flex-shrink-0 w-full h-full">
+      <img src="pontes rolantes.jpg" alt="" class="object-cover w-full h-full">
+    </div>
   </div>
 
   <div class="relative z-10 max-w-4xl mx-auto">
@@ -187,103 +188,61 @@ header nav {
   const heroText = document.getElementById("hero-text");
   const prevBtn = document.getElementById("prev");
   const nextBtn = document.getElementById("next");
-  const imagesContainer = document.querySelector("#hero > div.absolute");
-
-  // Imagens e textos correspondentes
+  const slidesContainer = document.getElementById("slides-container");
+  
   const slides = [
-    {
-      img: "corte a laser.jpg",
-      text: "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser."
-    },
-    {
-      img: "nr12.jpeg",
-      text: "Garantimos conformidade e segurança com NR12 para suas máquinas."
-    },
-    {
-      img: "pontes rolantes.jpg",
-      text: "Soluções em manutenção e instalação para pontes rolantes industriais."
-    }
+    "Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.",
+    "Garantimos conformidade e segurança com NR12 para suas máquinas.",
+    "Soluções em manutenção e instalação para pontes rolantes industriais."
   ];
 
   let currentIndex = 0;
 
-  // Cada slide tem largura do container do #hero
-  const heroSection = document.getElementById("hero");
-  const slideWidth = heroSection.offsetWidth;
-
-  // Para posicionar o container inicialmente na imagem certa (duplicamos 2x o conjunto)
-  let positionIndex = 0;
-
-  // Atualiza o texto e imagens no slide inicial
   function updateSlide() {
-    heroText.textContent = slides[currentIndex].text;
+    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    heroText.style.opacity = "0";
+    setTimeout(() => {
+      heroText.textContent = slides[currentIndex];
+      heroText.style.opacity = "1";
+    }, 300);
   }
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlide();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlide();
+  });
+
+  window.addEventListener("resize", () => {
+    updateSlide();
+  });
 
   updateSlide();
+</script>
 
-  function animateSlide(direction) {
-    // direction: 'left' ou 'right'
-
-    imagesContainer.style.transition = "transform 0.6s ease-in-out";
-
-    if (direction === "left") {
-      positionIndex++;
-      if (positionIndex > slides.length) {
-        // Quando passar do final do loop, reseta
-        positionIndex = 1;
-        imagesContainer.style.transition = "none";
-        imagesContainer.style.transform = `translateX(${-slideWidth * 0}px)`;
-        // Força repaint para aplicar a transição em seguida
-        void imagesContainer.offsetWidth;
-        imagesContainer.style.transition = "transform 0.6s ease-in-out";
-        imagesContainer.style.transform = `translateX(${-slideWidth * positionIndex}px)`;
-      } else {
-        imagesContainer.style.transform = `translateX(${-slideWidth * positionIndex}px)`;
-      }
-      currentIndex = (currentIndex + 1) % slides.length;
-    } else {
-      positionIndex--;
-      if (positionIndex < 0) {
-        positionIndex = slides.length - 1;
-        imagesContainer.style.transition = "none";
-        imagesContainer.style.transform = `translateX(${-slideWidth * slides.length}px)`;
-        void imagesContainer.offsetWidth;
-        imagesContainer.style.transition = "transform 0.6s ease-in-out";
-        imagesContainer.style.transform = `translateX(${-slideWidth * positionIndex}px)`;
-      } else {
-        imagesContainer.style.transform = `translateX(${-slideWidth * positionIndex}px)`;
-      }
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    }
-
-    // Anima o texto também
-    heroText.style.transition = "transform 0.6s ease-in-out, opacity 0.3s";
-    heroText.style.transform = direction === "left" ? "translateX(-100%)" : "translateX(100%)";
-    heroText.style.opacity = "0";
-
-    setTimeout(() => {
-      updateSlide();
-      heroText.style.transition = "none";
-      heroText.style.transform = "translateX(0)";
-      heroText.style.opacity = "1";
-    }, 600);
+<style>
+  #slides-container {
+    width: 300%; /* 3 slides * 100% cada */
+    height: 100%;
+    display: flex;
   }
 
-  // Posiciona container no slide inicial (primeira imagem)
-  imagesContainer.style.transform = `translateX(${-slideWidth * positionIndex}px)`;
+  .slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+  }
 
-  prevBtn.addEventListener("click", () => animateSlide("right"));
-  nextBtn.addEventListener("click", () => animateSlide("left"));
+  #hero-text {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
 
-  // Ajusta slideWidth caso o usuário redimensione a janela
-  window.addEventListener("resize", () => {
-    const newWidth = heroSection.offsetWidth;
-    if (newWidth !== slideWidth) {
-      imagesContainer.style.transition = "none";
-      imagesContainer.style.transform = `translateX(${-newWidth * positionIndex}px)`;
-    }
-  });
-</script>
 
   <section id="servicos" class="max-w-6xl mx-auto px-6 py-16 fade-in-up">
     <h2 class="text-3xl font-bold text-red-500 mb-8 text-center">Nossos Serviços</h2>
