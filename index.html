@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -155,17 +156,39 @@ header nav {
     </nav>
   </header>
 
-  <section class="relative text-white text-center py-20 fade-in-up overflow-hidden">
-  <button id="prev" aria-label="Imagem anterior" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-4xl font-bold select-none hover:text-red-500 transition z-20">&lt;</button>
-  <button id="next" aria-label="Próxima imagem" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-4xl font-bold select-none hover:text-red-500 transition z-20">&gt;</button>
-    <img src="corte a laser.jpg" alt="Corte a laser" class="absolute inset-0 w-full h-full object-cover opacity-30 z-0">
-    <div class="relative z-10 px-2 max-w-7xl mx-auto">
-      <p class="text-4xl md:text-5xl mb-6">Especialistas em manutenção, instalação e treinamentos para máquinas de corte a laser.</p>
-      <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
-        Solicite um Orçamento
-      </a>
-      <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
+  <section id="hero-carousel" class="relative text-white text-center py-20 fade-in-up overflow-hidden" style="height: 60vh;"> <!-- Ajuste a altura conforme necessário -->
+    <!-- Container do Carrossel -->
+    <div class="relative h-full">
+      <!-- Slides -->
+      <div class="carousel-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out opacity-100">
+        <img src="cortealaser.jpg" alt="Corte a laser" class="w-full h-full object-cover opacity-30">
+        <div class="absolute inset-0 flex flex-col justify-center items-center z-10 px-2 max-w-7xl mx-auto">
+          <p class="text-4xl md:text-5xl mb-6">Especialistas em manutenção instalaçao e treinamento em maquinas de corte a laser</p>
+          <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Solicite um Orçamento</a>
+          <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
+        </div>
+      </div>
+      <div class="carousel-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out opacity-0">
+        <img src="pontesrolantes.jpeg" alt="Pontes Rolantes" class="w-full h-full object-cover opacity-30">
+        <div class="absolute inset-0 flex flex-col justify-center items-center z-10 px-2 max-w-7xl mx-auto">
+          <p class="text-4xl md:text-5xl mb-6">Profissionais em manutenção, instalação e reparos elétricos de pontes rolantes.</p>
+          <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Solicite um Orçamento</a>
+          <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
+        </div>
+      </div>
+      <div class="carousel-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out opacity-0">
+        <img src="nr12.jpg" alt="NR-12" class="w-full h-full object-cover opacity-30">
+        <div class="absolute inset-0 flex flex-col justify-center items-center z-10 px-2 max-w-7xl mx-auto">
+          <p class="text-4xl md:text-5xl mb-6">Adequações e manutenções de sistemas NR-12, segurança e qualidade na sua empresa.</p>
+          <a href="#form-orcamento" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Solicite um Orçamento</a>
+          <p class="mt-2 text-sm text-gray-300">Atendimento em todo o Brasil</p>
+        </div>
+      </div>
     </div>
+
+    <!-- Botões de Navegação -->
+    <button id="prev" aria-label="Imagem anterior" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-4xl font-bold select-none hover:text-red-500 transition z-20">&lt;</button>
+    <button id="next" aria-label="Próxima imagem" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-4xl font-bold select-none hover:text-red-500 transition z-20">&gt;</button>
   </section>
 
   <section id="servicos" class="max-w-6xl mx-auto px-6 py-16 fade-in-up">
@@ -336,3 +359,44 @@ header nav {
   </script>
 </body>
 </html>
+
+
+<script>
+  const slides = document.querySelectorAll('#hero-carousel .carousel-slide');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('opacity-100');
+      slide.classList.add('opacity-0');
+      // Ensure smooth transition by delaying removal of active class if needed
+      // Or rely purely on opacity transition defined in CSS
+    });
+    slides[index].classList.remove('opacity-0');
+    slides[index].classList.add('opacity-100');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  // Initialize the first slide (already done via HTML classes, but good practice)
+  // showSlide(currentSlide); 
+
+  // Add event listeners
+  prevButton.addEventListener('click', prevSlide);
+  nextButton.addEventListener('click', nextSlide);
+
+  // Optional: Add automatic sliding (e.g., every 5 seconds)
+  // setInterval(nextSlide, 5000); // Uncomment for auto-play
+
+</script>
