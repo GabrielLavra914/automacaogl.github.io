@@ -256,7 +256,7 @@ header nav {
  <section id="Fotos" class="max-w-full mx-auto px-6 py-16 fade-in-up">
   <h2 class="text-3xl font-bold text-red-500 mb-8 text-center">Fotos</h2>
   <div class="text-center text-lg space-y-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 isolate"> <!-- Adicionado isolate para corrigir z-index -->
       <div class="relative group group-hover:z-50">
         <img src="foto1.jpg" alt="Imagem 1" class="w-full h-72 object-cover rounded-lg transition-transform duration-300 group-hover:scale-125 group-hover:border-2 group-hover:border-white/50 group-hover:rounded-lg">
         <div class="absolute bottom-0 left-0 right-0 p-4 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
