@@ -53,25 +53,53 @@
       box-shadow: 0 10px 15px rgba(255, 0, 0, 0.3);
     }
 
+    /* Estilos do Modal */
     .modal-background {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+      backdrop-filter: blur(5px); /* Efeito de desfoque */
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 50;
+      z-index: 150; /* Z-index alto para ficar sobre tudo */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    }
+    .modal-background.visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease, visibility 0s linear 0s;
     }
 
     .modal {
-      background: #1f2937;
+      background: #1f2937; /* Fundo do modal */
       padding: 2rem;
       border-radius: 1rem;
       text-align: center;
       color: white;
+      position: relative; /* Para posicionar o botão X */
+      max-width: 90%; /* Limita largura em telas pequenas */
+      width: 400px; /* Largura padrão */
     }
+    .modal-close-button {
+        position: absolute;
+        top: 0.5rem; /* 8px */
+        right: 0.5rem; /* 8px */
+        background: none;
+        border: none;
+        color: #9ca3af; /* cinza-400 */
+        font-size: 1.875rem; /* text-3xl */
+        line-height: 1;
+        cursor: pointer;
+        padding: 0.25rem;
+    }
+    .modal-close-button:hover {
+        color: white;
+    }
+    /* Fim Estilos Modal */
 
     .floating-buttons {
       position: fixed;
@@ -143,48 +171,44 @@
     /* --- CSS para Hover das Fotos (Controlado por JS) --- */
     .foto-container {
       position: relative; /* Necessário para z-index */
-      /* Removido transition de z-index daqui para evitar conflitos */
     }
     .foto-imagem {
       transition: transform 0.3s ease;
-      display: block; /* Garante que a imagem se comporte como bloco */
-      /* Estilos base já aplicados pelo Tailwind (w-full h-72 object-cover rounded-lg) */
+      display: block;
     }
     .foto-texto-bg {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 1rem; /* Equivalente a p-4 */
+      padding: 1rem;
       display: flex;
       justify-content: center;
       align-items: flex-end;
       opacity: 0;
       transition: opacity 0.3s ease;
-      pointer-events: none; /* Permite que cliques passem através */
+      pointer-events: none;
     }
     .foto-texto {
-      background-color: rgba(0, 0, 0, 0.7); /* Equivalente a bg-black/70 */
+      background-color: rgba(0, 0, 0, 0.7);
       color: white;
-      padding: 0.25rem 0.75rem; /* Equivalente a px-3 py-1 */
-      border-radius: 0.25rem; /* Equivalente a rounded */
-      font-size: 1.25rem; /* Equivalente a text-xl */
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.25rem;
+      font-size: 1.25rem;
     }
 
     /* Estado ativo aplicado pelo JavaScript */
     .foto-container.foto-ativa {
-      z-index: 50; /* Traz para frente */
+      z-index: 50;
     }
     .foto-container.foto-ativa .foto-imagem {
-      transform: scale(1.25); /* Efeito de zoom */
-      border: 2px solid rgba(255, 255, 255, 0.5); /* Equivalente a border-2 border-white/50 */
-      /* Mantém o rounded-lg base */
+      transform: scale(1.25);
+      border: 2px solid rgba(255, 255, 255, 0.5);
     }
     .foto-container.foto-ativa .foto-texto-bg {
-      opacity: 1; /* Mostra o fundo do texto */
+      opacity: 1;
     }
 
-    /* Garante isolamento do grid (já deve estar no HTML, mas reforça aqui) */
     #Fotos .grid {
         isolation: isolate;
     }
@@ -306,11 +330,11 @@
  <section id="Fotos" class="max-w-full mx-auto px-6 py-16 fade-in-up">
   <h2 class="text-3xl font-bold text-red-500 mb-8 text-center">Fotos</h2>
   <div class="text-center text-lg space-y-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 isolate"> <!-- isolate mantido -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 isolate">
       <!-- Foto 1 -->
-      <div class="relative foto-container"> <!-- Removido group, adicionado foto-container -->
-        <img src="foto1.jpg" alt="Imagem 1" class="w-full h-72 object-cover rounded-lg foto-imagem"> <!-- Adicionado foto-imagem, removido hover classes -->
-        <div class="foto-texto-bg"> <!-- Nova estrutura para texto -->
+      <div class="relative foto-container">
+        <img src="foto1.jpg" alt="Imagem 1" class="w-full h-72 object-cover rounded-lg foto-imagem">
+        <div class="foto-texto-bg">
             <span class="foto-texto">Analise e inspeção de fibra</span>
         </div>
       </div>
@@ -383,27 +407,25 @@
   </footer>
 
   <!-- Botões Flutuantes -->
- <div class="floating-buttons">
-    <a href="mailto:servicos.autogl@gmail.com" class="floating-button" title="Email">
-      <span class="tooltip">Envie um email</span>
+  <div class="floating-buttons">
+    <a href="https://wa.me/5511948670067?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20serviços%20da%20Automação%20GL." target="_blank" class="floating-button">
+      <img src="whatsapp.png" alt="WhatsApp">
+      <span class="tooltip">WhatsApp</span>
+    </a>
+    <a href="mailto:servicos.autogl@gmail.com" class="floating-button">
       <img src="email.png" alt="Email">
-    </a>
-    <a href="https://wa.me/5511983009604" target="_blank" class="floating-button" title="WhatsApp">
-      <span class="tooltip">Chame no WhatsApp</span>
-      <img src="telefone.png" alt="WhatsApp">
-    </a>
-    <a href="https://instagram.com/automacaogl" target="_blank" class="floating-button" title="Instagram">
-      <span class="tooltip">Confira nossas publicações</span>
-      <img src="instagram.png" alt="Instagram">
+      <span class="tooltip">Email</span>
     </a>
   </div>
 
-  <!-- Modal de Sucesso -->
-  <div id="successModal" class="modal-background hidden">
+  <!-- Modal de Sucesso Modificado -->
+  <div id="successModal" class="modal-background"> <!-- Removido hidden inicial, JS controla visibilidade -->
     <div class="modal">
+      <button onclick="closeModal()" class="modal-close-button" aria-label="Fechar">&times;</button>
       <h3 class="text-2xl font-bold mb-4">Sucesso!</h3>
-      <p>Sua solicitação de orçamento foi enviada. Entraremos em contato em breve.</p>
-      <button onclick="closeModal()" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Fechar</button>
+      <p>Um email foi enviado. Entraremos em contato em breve.</p>
+      <!-- Botão inferior opcional -->
+      <!-- <button onclick="closeModal()" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Fechar</button> -->
     </div>
   </div>
 
@@ -434,12 +456,12 @@
     nextButton.addEventListener("click", nextSlide);
 
     // Auto-play
-    setInterval(nextSlide, 2000); // Auto-play a cada 2 segundos
+    setInterval(nextSlide, 2000);
 
     // Inicializa o primeiro slide
     showSlide(currentSlide);
 
-    // Script do Formulário
+    // Script do Formulário (AJAX com Modal de Sucesso)
     const form = document.getElementById("formOrcamento");
     const formStatus = document.getElementById("form-status");
     const modal = document.getElementById("successModal");
@@ -447,7 +469,7 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       formStatus.textContent = "Enviando...";
-      formStatus.classList.remove("text-red-500");
+      formStatus.classList.remove("text-red-500", "text-green-500");
       formStatus.classList.add("text-yellow-500");
 
       const formData = new FormData(form);
@@ -458,32 +480,43 @@
           "Accept": "application/json",
         },
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.ok) {
-          formStatus.textContent = "";
-          form.reset();
-          modal.classList.remove("hidden");
-        } else {
-          formStatus.textContent = "Ocorreu um erro ao enviar. Tente novamente.";
-          formStatus.classList.remove("text-yellow-500");
-          formStatus.classList.add("text-red-500");
-          // Se houver erros específicos do FormSubmit, você pode tratá-los aqui
-          if (data.errors) {
-            console.error("Erros do formulário:", data.errors);
+      .then(response => {
+          if (!response.ok) {
+              // Tenta ler o corpo do erro como JSON
+              return response.json().then(err => { throw err; }).catch(() => { throw new Error(`HTTP error! status: ${response.status}`); });
           }
-        }
+          return response.json();
+      })
+      .then(data => {
+          // Verifica sucesso (FormSubmit pode retornar {ok: true} ou {success: "true"})
+          if (data.ok || data.success === "true" || data.success === true) {
+            formStatus.textContent = ""; // Limpa status
+            form.reset();
+            modal.classList.add("visible"); // Mostra o modal de sucesso
+          } else {
+            // Trata erro retornado pelo FormSubmit
+            console.error("Erro retornado pelo FormSubmit:", data);
+            formStatus.textContent = data.error || "Ocorreu um erro no servidor. Tente novamente.";
+            formStatus.classList.remove("text-yellow-500");
+            formStatus.classList.add("text-red-500");
+          }
       })
       .catch(error => {
-        console.error("Erro na requisição:", error);
-        formStatus.textContent = "Erro de conexão. Verifique sua internet.";
+        console.error("Erro na requisição ou processamento:", error);
+        let errorMessage = "Erro de conexão ou no servidor. Verifique sua internet e tente novamente.";
+        if (error && error.message) {
+            errorMessage = `Erro: ${error.message}. Tente novamente.`;
+        } else if (typeof error === "object" && error !== null && error.error) {
+             errorMessage = `Erro: ${error.error}. Tente novamente.`;
+        }
+        formStatus.textContent = errorMessage;
         formStatus.classList.remove("text-yellow-500");
         formStatus.classList.add("text-red-500");
       });
     });
 
     function closeModal() {
-      modal.classList.add("hidden");
+      modal.classList.remove("visible"); // Esconde o modal
     }
 
     // Script para Hover das Fotos (Controlado por JS)
@@ -499,6 +532,11 @@
           container.classList.remove("foto-ativa");
         });
       });
+
+      // Garante que o modal comece escondido
+      if (modal) {
+          modal.classList.remove("visible");
+      }
     });
 
   </script>
